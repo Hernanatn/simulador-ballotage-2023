@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;1,700&family=Special+Elite&display=swap');
+
+
+body
+{
+    background: #dfdfdf;
+    height: 100%;
+    margin: 15;
+    background-repeat: no-repeat;
+    background-attachment: fixed
+}
+
+h1
+{
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+}
+
+i
+{
+    font-family: 'Josefin Sans', sans-serif;
+    font-style: italic;
+    font-weight: 100;
+    line-height: 100%;
+}
+
+img
+{
+    max-width: 10%;
+    width: auto;
+}
+
+div
+{
+    align-self: center;
+
+}
+
+.contendor
+{
+    border-radius: 1;
+
+    background: #dfdfdf;
+}
+
+.barra
+{
+    position: fixed;
+    background-color: #3cb5e7;
+    top: 0;
+    left: 0;
+}
+
+.pie
+{
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    margin: 150;
+    padding: 10;
+    border:  10;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color:  white;
+    background-color: #3cb5e7;
+}
