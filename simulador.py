@@ -3,8 +3,6 @@ from threading import Thread
 from py.servidor import ConfigServidor, Servidor, ManejadorSolicitudes
 #webbrowser.open("http://localhost:420")
 
-
-
 CONFIG : ConfigServidor = ConfigServidor()
 HOST, PUERTO = CONFIG.direccion
 
@@ -26,6 +24,7 @@ def main():
 
     hiloCliente.join()
     hiloServidor.join()
+    
     
 
 

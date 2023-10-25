@@ -5,7 +5,14 @@ a = Analysis(
     ['simulador.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        ('simulador.html',"."),
+        ('recursos/imagenes',"recursos/imagenes"),
+        ('py',"py"),
+        ('js',"js"),
+        ('css',"css"),
+        ('html',"html")
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -18,13 +25,16 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
+    a.binaries,
+    a.datas,
     [],
-    exclude_binaries=True,
     name='simulador',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
+    upx_exclude=[],
+    runtime_tmpdir=None,
     console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
@@ -32,13 +42,4 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon=['C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR BALLOTAGE\\recursos\\iconos\\A.ico'],
-)
-coll = COLLECT(
-    exe,
-    a.binaries,
-    a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='simulador',
 )

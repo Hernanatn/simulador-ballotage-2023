@@ -8,6 +8,17 @@ from mimetypes import guess_type
 from json import loads
 from urllib.parse import unquote
 
+def rutaRecurso(rutaRelativa):
+    import sys
+    import os
+    try:
+        rutaBase = sys._MEIPASS
+    except Exception:
+        rutaBase = os.path.abspath(".")
+
+    return os.path.join(rutaBase, rutaRelativa)
+
+
 class Computador():
 
     def __init__(self, valores : dict) -> None:
@@ -49,11 +60,11 @@ class Computador():
 
     def generarHTML(self) -> str:
         base : str
-        with open("./html/resultado.html","r",encoding="utf-8") as plantilla:
+        with open(rutaRecurso("./html/resultado.html"),"r",encoding="utf-8") as plantilla:
             base = plantilla.read()
         
         ganador = "Sergio Tomás Massa" if self.votosSTM > self.votosJM else "Javier Gerardo Milei"
-        rutaImagen = "./recursos/imagenes/stm-ganador.jpg" if self.votosSTM > self.votosJM else "../recursos/imagenes/jgm-ganador.jpg"
+        rutaImagen = "./recursos/imagenes/stm-ganador.jpg" if self.votosSTM > self.votosJM else "./recursos/imagenes/jgm-ganador.jpg"
         cantidadVotos = max(self.votosSTM,self.votosJM)
 
         resultado = base\
@@ -107,7 +118,7 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
 
     def refrescarIndice(self):
         INDICE : bytes
-        with open("simulador.html","rb") as simulador:
+        with open(rutaRecurso("simulador.html"),"rb") as simulador:
             INDICE = simulador.read()    
         self.indice = INDICE
 
@@ -119,21 +130,21 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
             self.send_header("Content-type","text/html")
             self.end_headers()
             self.wfile.write(self.indice)
-        elif isfile(f"./{URI_SOLICITUD}"):
+        elif isfile(rutaRecurso(f"./{URI_SOLICITUD}")):
             tipo = guess_type(URI_SOLICITUD)[0]
             self.send_response(200)
             self.send_header("Content-type",tipo)
             self.end_headers()
-            archivo = open(f"./{URI_SOLICITUD}","rb")
+            archivo = open(rutaRecurso(f"./{URI_SOLICITUD}"),"rb")
             data = archivo.read()
             archivo.close()
             self.wfile.write(data)
         
-        elif isfile(f"./html/{URI_SOLICITUD}"):
+        elif isfile(rutaRecurso(f"./html/{URI_SOLICITUD}")):
             self.send_response(200)
             self.send_header("Content-type","text/html")
             self.end_headers()
-            html = self.leerArchivo(f"./html/{URI_SOLICITUD}")
+            html = self.leerArchivo(rutaRecurso(f"./html/{URI_SOLICITUD}"))
             self.wfile.write(html)
 
         else:
@@ -144,15 +155,14 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
         self.wfile.flush()
         
     def do_POST(self):
-        if self.path == "/botonPrueba":
-            print("boton apretado")
-            print(f"{self.requestline}")
+        if self.path == "/cerrar":
             self.send_response(200)
             self.send_header("Content-type","text/html")
             self.end_headers()
-            self.wfile.write(bytes(b"<div>boton apretado!</div>"))
-            self.wfile.write(bytes(b'<button hx-post="/botonPrueba" hx-swap="outerHTML"> otro boton de prueba </button>'))
-            self.wfile.write(bytes(b'<button hx-post="/botonERROR" hx-swap="outerHTML"> esteBotonLanzaUnError </button>'))
+            self.wfile.write(bytes(b'<div id="principal"><h1>Gracias por usar el Simulador.</h1></div>'))
+            self.wfile.flush()
+            self.server.server_close()
+            return
 
         elif self.path == "/computar":
             largo = int(self.headers.get('content-length'))
@@ -181,11 +191,9 @@ class Servidor(HTTPServer):
     def abrir(self):
         try:
             self.serve_forever()
+        except Exception:
+            self.cerrar()
         except KeyboardInterrupt:
             self.cerrar()
-        except:
-            self.cerrar()
-        finally:
-            self.abrir()
             
 if __name__ == '__main__': pass

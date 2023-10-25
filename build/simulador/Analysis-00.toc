@@ -14,7 +14,58 @@
  False,
  {},
  [],
- [],
+ [('css\\estilos.css',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\css\\estilos.css',
+   'DATA'),
+  ('html\\barraGanador.html',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\html\\barraGanador.html',
+   'DATA'),
+  ('html\\resultado.html',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\html\\resultado.html',
+   'DATA'),
+  ('js\\barras.js',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\js\\barras.js',
+   'DATA'),
+  ('js\\deslizadores.js',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\js\\deslizadores.js',
+   'DATA'),
+  ('py\\__pycache__\\servidor.cpython-312.pyc',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\py\\__pycache__\\servidor.cpython-312.pyc',
+   'DATA'),
+  ('py\\servidor.py',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\py\\servidor.py',
+   'DATA'),
+  ('recursos\\imagenes\\+A2023.png',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\+A2023.png',
+   'DATA'),
+  ('recursos\\imagenes\\jgm-ganador.jpg',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\jgm-ganador.jpg',
+   'DATA'),
+  ('recursos\\imagenes\\jgm-ganador.png',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\jgm-ganador.png',
+   'DATA'),
+  ('recursos\\imagenes\\stm-ganador.jpg',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\stm-ganador.jpg',
+   'DATA'),
+  ('recursos\\imagenes\\stm-ganador.png',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\stm-ganador.png',
+   'DATA'),
+  ('simulador.html',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\simulador.html',
+   'DATA')],
  '3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit '
  '(AMD64)]',
  [('pyi_rth_inspect',
@@ -321,14 +372,14 @@
   ('tracemalloc',
    'C:\\Users\\wasab\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\tracemalloc.py',
    'PYMODULE'),
-  ('stringprep',
-   'C:\\Users\\wasab\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\stringprep.py',
-   'PYMODULE'),
   ('subprocess',
    'C:\\Users\\wasab\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py',
    'PYMODULE'),
   ('signal',
    'C:\\Users\\wasab\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\signal.py',
+   'PYMODULE'),
+  ('stringprep',
+   'C:\\Users\\wasab\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\stringprep.py',
    'PYMODULE'),
   ('py.servidor',
    'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
@@ -427,7 +478,59 @@
    'BINARY')],
  [],
  [],
- [('base_library.zip',
+ [('css\\estilos.css',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\css\\estilos.css',
+   'DATA'),
+  ('html\\barraGanador.html',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\html\\barraGanador.html',
+   'DATA'),
+  ('html\\resultado.html',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\html\\resultado.html',
+   'DATA'),
+  ('js\\barras.js',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\js\\barras.js',
+   'DATA'),
+  ('js\\deslizadores.js',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\js\\deslizadores.js',
+   'DATA'),
+  ('py\\__pycache__\\servidor.cpython-312.pyc',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\py\\__pycache__\\servidor.cpython-312.pyc',
+   'DATA'),
+  ('py\\servidor.py',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\py\\servidor.py',
+   'DATA'),
+  ('recursos\\imagenes\\+A2023.png',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\+A2023.png',
+   'DATA'),
+  ('recursos\\imagenes\\jgm-ganador.jpg',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\jgm-ganador.jpg',
+   'DATA'),
+  ('recursos\\imagenes\\jgm-ganador.png',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\jgm-ganador.png',
+   'DATA'),
+  ('recursos\\imagenes\\stm-ganador.jpg',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\stm-ganador.jpg',
+   'DATA'),
+  ('recursos\\imagenes\\stm-ganador.png',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\recursos\\imagenes\\stm-ganador.png',
+   'DATA'),
+  ('simulador.html',
+   'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
+   'BALLOTAGE\\simulador.html',
+   'DATA'),
+  ('base_library.zip',
    'C:\\Users\\wasab\\Documents\\Archivos Transitorios\\SIMULADOR '
    'BALLOTAGE\\build\\simulador\\base_library.zip',
    'DATA')])
