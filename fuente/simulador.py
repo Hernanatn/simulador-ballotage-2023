@@ -9,20 +9,21 @@ HOST, PUERTO = CONFIG.direccion
 def iniciarServidor(host :str = HOST, puerto :int = PUERTO):
     servidor = Servidor((host,puerto),ManejadorSolicitudes)
     print(f"Servidor iniciado: http://{servidor.server_address[0]}:{servidor.server_address[1]}")
-
-    servidor.abrir()
+    try:
+        servidor.abrir()
+    except Exception as e:
+        print(f"{e}")
+        return
 
 def abrirSimulador(host :str = HOST, puerto :int = PUERTO):
-    webbrowser.open(f"http://{host}:{puerto}/",new=1,autoraise=True)
+    import webview
+    webview.create_window("Simulador 2023",f"http://{host}:{puerto}/",width=500,height=1000,min_size=(450,1000))
+    webview.start()
 
 def main():
     hiloServidor : Thread = Thread(target=iniciarServidor)
-    hiloCliente : Thread = Thread(target=abrirSimulador)
-
     hiloServidor.start()
-    hiloCliente.start()
-
-    hiloCliente.join()
+    abrirSimulador()
     hiloServidor.join()
     
     

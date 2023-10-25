@@ -7,7 +7,7 @@ from typing import Any
 from mimetypes import guess_type
 from json import loads
 from urllib.parse import unquote
-
+from threading import Thread
 def rutaRecurso(rutaRelativa):
     import sys
     import os
@@ -18,6 +18,7 @@ def rutaRecurso(rutaRelativa):
 
     return os.path.join(rutaBase, rutaRelativa)
 
+class ServidorMuerto(Exception): ...
 
 class Computador():
 
@@ -39,9 +40,6 @@ class Computador():
         self.bregmanJM : int = int(valores['bregmanJM'])
         self.nuevosJM : int = int(valores['nuevosJM'])
         
-        for k,v in valores.items():
-            print(k,v)
-
 
     @property
     def Afirmativos(self) -> int:
@@ -161,8 +159,8 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(bytes(b'<div id="principal"><h1>Gracias por usar el Simulador.</h1></div>'))
             self.wfile.flush()
-            self.server.server_close()
-            return
+            Thread(target=self.server.shutdown, daemon=True).start()
+            
 
         elif self.path == "/computar":
             largo = int(self.headers.get('content-length'))
@@ -188,12 +186,19 @@ class Servidor(HTTPServer):
         self.server_close()
         return self
 
+
+    def morir(self):
+        print("Servidor muerto")
+        raise ServidorMuerto("La conexión fue finiquitada por el cliente.") 
+
     def abrir(self):
         try:
             self.serve_forever()
         except Exception:
             self.cerrar()
+        except ServidorMuerto as e:
+            raise e
         except KeyboardInterrupt:
-            self.cerrar()
+            self.morir()
             
 if __name__ == '__main__': pass
