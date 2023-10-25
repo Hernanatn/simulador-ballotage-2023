@@ -17,7 +17,7 @@ def iniciarServidor(host :str = HOST, puerto :int = PUERTO):
 
 def abrirSimulador(host :str = HOST, puerto :int = PUERTO):
     import webview
-    webview.create_window("Simulador 2023",f"http://{host}:{puerto}/",width=500,height=1000,min_size=(450,1000))
+    webview.create_window("Simulador 2023",f"http://{host}:{puerto}/",width=800,height=1000,min_size=(450,1000))
     webview.start()
 
 def main():
