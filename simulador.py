@@ -1,7 +1,6 @@
 import webbrowser
 from threading import Thread
-
-from python.servidor import ConfigServidor
+from py.servidor import ConfigServidor, Servidor, ManejadorSolicitudes
 #webbrowser.open("http://localhost:420")
 
 
@@ -9,10 +8,14 @@ from python.servidor import ConfigServidor
 CONFIG : ConfigServidor = ConfigServidor()
 HOST, PUERTO = CONFIG.direccion
 
-def iniciarServidor(): ...
+def iniciarServidor(host :str = HOST, puerto :int = PUERTO):
+    servidor = Servidor((host,puerto),ManejadorSolicitudes)
+    print(f"Servidor iniciado: http://{servidor.server_address[0]}:{servidor.server_address[1]}")
+
+    servidor.abrir()
 
 def abrirSimulador(host :str = HOST, puerto :int = PUERTO):
-    webbrowser.open(f"http://{host}:{puerto}",new=1,autoraise=True)
+    webbrowser.open(f"http://{host}:{puerto}/",new=1,autoraise=True)
 
 def main():
     hiloServidor : Thread = Thread(target=iniciarServidor)

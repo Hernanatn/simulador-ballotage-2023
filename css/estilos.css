@@ -1,9 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;1,700&family=Special+Elite&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;1,500;1,700&family=Special+Elite&display=swap');
 
+li 
+{
+    display: inline;
+}
+
+ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
 
 body
 {
-    background: #dfdfdf;
+    background: linear-gradient(to bottom, #2aafe8,#dfdfdf);
     height: 100%;
     margin: 15;
     background-repeat: no-repeat;
@@ -17,39 +28,120 @@ h1
     font-weight: 700;
 }
 
+h2
+{
+    font-family: 'Josefin Sans';
+    font-weight: 400;  
+}
+
 i
 {
     font-family: 'Josefin Sans', sans-serif;
     font-style: italic;
-    font-weight: 100;
+    font-weight: 400;
     line-height: 100%;
+    margin: 0%
 }
 
-img
+img.logo
 {
-    max-width: 10%;
-    width: auto;
+    max-height: 7vh;
+    float: left;
 }
 
-div
+.contenedor
+{
+    text-align: center;
+}
+
+div#principal
 {
     align-self: center;
+    width: 98vw;
+    height: 82vh;
+    background-color: transparent;
+    margin: 9vh auto auto;
+    position: relative;
 
 }
 
-.contendor
+div#numeros
 {
-    border-radius: 1;
-
+    float: left;
     background: #dfdfdf;
+    position: absolute;
+    height: 12%;
+    width: 33%;
+}
+
+div#votos
+{
+    background: #dfdfdf;
+    position: absolute;
+    height:87%;
+    width: 33%;
+    bottom: 0;
+    float: left;
+}
+
+div#contenedorResultado
+{
+    float: right;
+    background: #dfdfdf;
+    height: 100%;
+    width: 66%;
+    position: relative;
+
+    display: flex;
+    flex-flow: column;
+}
+
+div#resultado {
+    transition: all 1s ease-in;
+    width: 100%;
+    flex: 0 1 auto;
+}
+
+div#ganador
+{
+    flex: 1 0 auto;
+    bottom: 0;
+}
+
+
+div.barraGanador
+{
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    margin: 0%;
+    border: 0%;
+}
+
+div#barraSTM
+{
+    background-color: #2aafe8;
+    color: #dfdfdf;
+    float: left;
+}
+div#barraJM
+{
+    background-color: #ae3ce7;
+    color: #dfdfdf;
+    float: right;
 }
 
 .barra
 {
     position: fixed;
-    background-color: #3cb5e7;
+    background-color: transparent;
     top: 0;
     left: 0;
+    height: 3.5vw; 
+    width: 100vw;
+    padding: 1vh
 }
 
 .pie
@@ -57,9 +149,9 @@ div
     font-family: 'Josefin Sans';
     font-style: italic;
     font-weight: 700;
-    margin: 150;
-    padding: 10;
-    border:  10;
+    margin: 0;
+    padding: 1vh;
+    border:  1vh;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -67,4 +159,220 @@ div
     text-align: center;
     color:  white;
     background-color: #3cb5e7;
+    height: 5vh;
 }
+
+
+.cajaDeslizador {
+    width: 100%; 
+  }
+
+.cajaDeslizadorDoble
+{
+    width: 100%;
+}
+
+.controlDeslizadorDoble
+{
+    position: relative;
+    min-height: 45px;
+    margin-top: 0%;
+}
+  /* The deslizador itself */
+.deslizador, .deslizadorJM, .deslizadorSTM  {
+-webkit-appearance: none;  /* Override default CSS styles */
+appearance: none;
+width: 80%; /* Full-width */
+height: 10px; /* Specified height */
+background: #d3d3d3; 
+outline: none; /* Remove outline */
+opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+transition: opacity .2s;
+margin: 7.5px;
+}
+
+.deslizadorJM, .deslizadorSTM
+{
+    -webkit-appearance: none; 
+    appearance: none;
+    height: 10px;
+    width: 80%;
+    position: absolute;
+    left: 3vw;
+    background-color: #d3d3d3;
+    pointer-events: none;
+}
+.deslizadorJM:active, .deslizadorSTM:active, .deslizadorJM:focus, .deslizadorSTM:focus
+{
+    z-index: 1;
+    background-color: transparent;
+}
+/*.deslizadorSTM
+{
+    /*z-index: 1;
+    background-color: transparent;
+}*/
+/* Mouse-over effects */
+.deslizador:hover {
+opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The deslizador handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.deslizador::-webkit-slider-thumb {
+-webkit-appearance: none; /* Override default look */
+appearance: none;
+width: 25px; /* Set a specific deslizador handle width */
+height: 25px; /* deslizador handle height */
+background: #3cb5e7; /* Green background */
+cursor: pointer; /* Cursor on hover */
+}
+
+.deslizador::-moz-range-thumb {
+width: 25px; /* Set a specific deslizador handle width */
+height: 25px; /* deslizador handle height */
+background: #3cb5e7; /* Green background */
+cursor: pointer; /* Cursor on hover */
+}
+
+
+.deslizadorSTM::-webkit-slider-thumb {
+-webkit-appearance: none; /* Override default look */
+appearance: none;
+width: 25px; /* Set a specific deslizador handle width */
+height: 25px; /* deslizador handle height */
+background: #3cb5e7; /* Green background */
+cursor: pointer; /* Cursor on hover */
+pointer-events: all;
+z-index: 1;
+}
+    
+.deslizadorSTM::-moz-range-thumb {
+width: 25px; /* Set a specific deslizador handle width */
+height: 25px; /* deslizador handle height */
+background: #3cb5e7; /* Green background */
+cursor: pointer; /* Cursor on hover */
+pointer-events: all;
+z-index: 1;
+}
+
+.deslizadorJM::-webkit-slider-thumb {
+-webkit-appearance: none; /* Override default look */
+appearance: none;
+width: 25px; /* Set a specific deslizador handle width */
+height: 25px; /* deslizador handle height */
+background: #ae3ce7; /* Green background */
+cursor: pointer; /* Cursor on hover */
+pointer-events: all;
+z-index: 1;
+}
+    
+.deslizadorJM::-moz-range-thumb {
+width: 25px; /* Set a specific deslizador handle width */
+height: 25px; /* deslizador handle height */
+background: #ae3ce7; /* Green background */
+cursor: pointer; /* Cursor on hover */
+pointer-events: all;
+z-index: 1;
+}
+
+
+
+button.computar {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 80%; /* Full-width */
+    height: 40px; /* Specified height */
+    background: #c2a43a; 
+    outline: none; /* Remove outline */
+    border : none;
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s ease-in;
+    margin: 0%;
+
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    color: #000000;
+    box-shadow: 2px 2px black;
+    
+}
+
+button.computar:active
+{
+    opacity: 1;
+    background: #000; 
+    color: #fdc601;
+    transform: translate(2px,2px);
+    box-shadow: 0px 0px transparent;
+   
+}
+
+button.barra {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    max-width: 7vh; /* Full-width */
+    height: 7vh; /* Specified height */
+ 
+    outline: none; /* Remove outline */
+    border : none;
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    position: inherit;
+
+    color: #000000;
+    background: #c2a43a; 
+}
+
+button.barra#compartir
+{
+    background: #000000;
+    color: #c2a43a; 
+}
+
+button.barra#reiniciar
+{
+    background: #d3d3d3;
+    color: #000000; 
+}
+
+button.barra#compartir:active
+{
+    color: #000000;
+    background: #c2a43a;
+    opacity: 1;
+}
+
+button.barra#reiniciar:active
+{
+    color: #d3d3d3;
+    background: #000000;
+    opacity: 1;
+}
+
+button:hover
+{
+    opacity: 1;
+    background: #fdc601; 
+
+   
+}
+
+
+
+div#contenedorVotos
+{
+    width: 100%;
+    background: #000000;
+    color: #dfdfdf;
+    text-align: center;
+    height: 10%;
+    margin: 0%;
+}
+

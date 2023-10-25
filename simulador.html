@@ -4,21 +4,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador Ballotage</title>
-    <link rel="icon" type="image/png" href="./recursos/iconos/+A.png">
-
+    <link rel="icon" type="image/png" href="./recursos/iconos/A.png">
     <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
-
+    <script src="./js/deslizadores.js"></script>
+    <script src="./js/deslizadores.js"></script>
+    
 </head>
 <body>
 
-<div class="barra" style="height: 3.5vw; width: auto; padding: 1vh; float: left;">
-    <img src="./recursos/imagenes/+A2023.png" style="float: left;"><h1 style="margin: 0%; font-size: 2.5vw;">BALLOTAGE</h1>
-    <i style="font-size: 1vw; margin: 0%; vertical-align: top;">Simulador</i>
+<div class="barra">
+    <ul style="float: left;">
+    <li><img class= "logo" src="./recursos/imagenes/+A2023.png" ></li>
+    <li></li><h1 style="float: inline-start;margin: 0%; font-size: 5vh;">BALLOTAGE</h1><br>
+    <i style="text-align: left; font-size: 2vh; margin: 0%; vertical-align: top;">Simulador de Escenarios</i>
+    </ul>
+    <ul style="float: right;">
+        <li><button class="barra" id="compartir" style="float: right; margin-right: 2vw;"> <span class="material-symbols-outlined">
+            share
+            </span></button></li>
+        <li><button class="barra" id="reiniciar" style="float: right; margin-right: 1vw;"> <span class="material-symbols-outlined"
+            hx-on:click ="
+            iniciarPorDefecto();
+            actualizarTodos();
+            document.getElementById('salidaParticipacion').innerHTML = document.getElementById('participacion').value;      
+            ">
+            refresh
+            </span></button></li>
+    </ul>
 </div>
 
+<div id="principal">
+    <div class="contenedor" id="numeros">     
+    <div>
+        <br>
+        <i>Participacion</i>
+        <div class="cajaDeslizador">
+            <input type="range" min="66.0" max="85.0" value="77.5" step="0.5" class="deslizador" id="participacion"
+            hx-trigger = "change changed"
+            hx-on:input = "actualizarParticipacion(); actualizarNuevos();"
+            ></input>
+            <br><i><span class="valoresDeslizador" id="salidaParticipacion"
+                    >77.5</span>%</i>
+        </div>
+    </div>
+    </div>
+    <div class="contenedor" id="votos">  
+        <h2>Votos</h2>   
+        <div>
+            <i>Retención Massa</i>
+            <div class="cajaDeslizador cajaDeslizadorDoble">
+            <div class="controlDeslizadorDoble">
+                <input type="range" min="0" max="1" value="1" step="0.01" class="deslizadorJM" id="massaJM"
+                hx-on:input = "if (document.getElementById('massaJM').value < document.getElementById('massaSTM').value){document.getElementById('massaSTM').value = document.getElementById('massaJM').value}; actualizarMassa();">
+                <input type="range" min="0" max="1" value="0.9" step="0.01" class="deslizadorSTM" id="massaSTM"
+                hx-on:input = "if (document.getElementById('massaSTM').value > document.getElementById('massaJM').value){document.getElementById('massaJM').value = document.getElementById('massaSTM').value}; actualizarMassa();"
+                >
+                <br><br><i><span class="valoresDeslizador" id="salidaMassa">8.681.384</span> de votos</i>
+            </div>
+            </div>
+        </div>
+        <div>
+            <br>
+            <i>Retención Milei</i>
+            <div class="cajaDeslizador cajaDeslizadorDoble">
+            <div class="controlDeslizadorDoble">
+                <input type="range" min="0" max="1" value="1" step="0.01" class="deslizadorSTM" id="mileiSTM"
+                hx-on:input = "if (document.getElementById('mileiSTM').value < document.getElementById('mileiJM').value){document.getElementById('mileiJM').value = document.getElementById('mileiSTM').value}; actualizarMilei();">
+                <input type="range" min="0" max="1" value="0.9" step="0.01" class="deslizadorJM" id="mileiJM"
+                hx-on:input = "if (document.getElementById('mileiJM').value > document.getElementById('mileiSTM').value){document.getElementById('mileiSTM').value = document.getElementById('mileiJM').value}; actualizarMilei();"
+                >
+                <br><br><i><span class="valoresDeslizador" id="salidaMilei">7.095.902</span> de votos</i>
+            </div>
+            </div>
+        </div>
+        <div id="bullrich">
+            <br>
+            <i>Transferencia Bullrich</i>
+            <div class="cajaDeslizador cajaDeslizadorDoble">
+                <div class="controlDeslizadorDoble">
+                    <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="bullrichJM"
+                    hx-on:input = "if (document.getElementById('bullrichJM').value < document.getElementById('bullrichSTM').value){document.getElementById('bullrichSTM').value = document.getElementById('bullrichJM').value}; actualizarBullrich();"
+                    >
+                    <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="bullrichSTM"
+                    hx-on:input = "if (document.getElementById('bullrichSTM').value > document.getElementById('bullrichJM').value){document.getElementById('bullrichJM').value = document.getElementById('bullrichSTM').value}; actualizarBullrich();"
+                    >
+                    <br><br><i><span class="valoresDeslizador" id="salidabullrich">-</span></i>
+                </div>
+            </div>
+        </div>
+        <div id="schiaretti">
+            <br>
+            <i>Transferencia Schiaretti</i>
+            <div class="cajaDeslizador cajaDeslizadorDoble">
+                <div class="controlDeslizadorDoble">
+                    <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="schiarettiJM"
+                    hx-on:input = "if (document.getElementById('schiarettiJM').value < document.getElementById('schiarettiSTM').value){document.getElementById('schiarettiSTM').value = document.getElementById('schiarettiJM').value}; actualizarSchiaretti();"
+                    >
+                    <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="schiarettiSTM"
+                    hx-on:input = "if (document.getElementById('schiarettiSTM').value > document.getElementById('schiarettiJM').value){document.getElementById('schiarettiJM').value = document.getElementById('schiarettiSTM').value}; actualizarSchiaretti();"
+                    >
+                    <br><br><i><span class="valoresDeslizador" id="salidaSchiaretti">-</span></i>
+                </div>
+            </div>
+        </div>
+        <div id="bregman">
+            <br>
+            <i>Transferencia Bregman</i>
+            <div class="cajaDeslizador cajaDeslizadorDoble">
+                <div class="controlDeslizadorDoble">
+                    <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="bregmanJM"
+                    hx-on:input = "if (document.getElementById('bregmanJM').value < document.getElementById('bregmanSTM').value){document.getElementById('bregmanSTM').value = document.getElementById('bregmanJM').value}; actualizarBregman();"
+                    >
+                    <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="bregmanSTM"
+                    hx-on:input = "if (document.getElementById('bregmanSTM').value > document.getElementById('bregmanJM').value){document.getElementById('bregmanJM').value = document.getElementById('bregmanSTM').value}; actualizarBregman();"
+                    >
+                    <br><br><i><span class="valoresDeslizador" id="salidabregman">-</span></i>
+                </div>
+            </div>
+        </div>   
+        <div id="nuevos">
+            <br>
+            <i id="votantesNuevos">Nuevos Votantes</i>
+            <div class="cajaDeslizador cajaDeslizadorDoble">
+                <div class="controlDeslizadorDoble">
+                    <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="nuevosJM"
+                    hx-on:input = "if (document.getElementById('nuevosJM').value < document.getElementById('nuevosSTM').value){document.getElementById('nuevosSTM').value = document.getElementById('nuevosJM').value}; actualizarNuevos();"
+                    >
+                    <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="nuevosSTM"
+                    hx-on:input = "if (document.getElementById('nuevosSTM').value > document.getElementById('nuevosJM').value){document.getElementById('nuevosJM').value = document.getElementById('nuevosSTM').value}; actualizarNuevos();"
+                    >
+                    <br><br><i><span class="valoresDeslizador" id="salidanuevos">-</span></i>
+                </div>
+            </div>
+        </div>
+    <button class="computar"
+        hx-post = "/computar"
+        hx-vals = 'js:{"valores" : devolverValores()}'
+        hx-swap = "outerHTML"
+        hx-target = "#resultado"
+    >
+        COMPUTAR ESCENARIO
+    </button>
+    <div style="display: none; height: 0%; width: 0%;"
+        hx-get = "/barraGanador.html"
+        hx-trigger ="load"
+        hx-swap = "outerHTML"
+        hx-target = "#ganador"
+    >
+    </div>                    
+    </div>
+    <div class="contenedor" id="contenedorResultado">     
+        <div class="contenedor" id="resultado">     
+        </div>
+        <div id="ganador">
+            <div class= "barraGanador" id="barraSTM">
+                a
+            </div>
+            <div class= "barraGanador" id="barraJM"> 
+                a
+            </div>
+        </div>
+    </div>
+
 <div class="pie">
-    <p>Hecho por <a href="https://cajadeideas.ar">Chaska</a> (c) 2023</p><p>  </p>
+    <p style="font-size: 2vh;">Hecho por <a href="https://cajadeideas.ar">Chaska</a> (c) 2023</p><p>  </p>
 </div>
 </body>
 </html>

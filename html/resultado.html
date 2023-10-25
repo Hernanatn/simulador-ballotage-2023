@@ -1,0 +1,15 @@
+<div class="contenedor" id="resultado"
+    hx-post = "/computar"
+    hx-vals = 'js:{"valores" : devolverValores()}'
+    hx-swap = "outerHTML"
+    hx-target = "#resultado"
+    hx-trigger = "input from:input"
+    hx-on:load = "ajustarBarrasGanador();">
+
+    <h2 style="background-color: #000; color: #dfdfdf; margin: 0%; padding: 1vh;">Resultado</h2>
+    <div style="width: 100%; padding-top: 2vh; padding-bottom: 2vh; background-color: #fdc601; color: #000; height: auto; float: inline-end;">
+    <i><span style="float: left; margin-left: 10vw;">Votos Totales : [VOTOS-TOTALES]</span> <span style="float: right; margin-right: 10vw;">Requeridos : [MITAD-MAS-UNO]</span></i>
+    </div>
+    <img src="[IMAGEN-GANADOR]" style="width: 100%; margin: 0%; border: 0%; background-color: #000000; display: block;" id="imgGanador">
+    <div id="valores-resultados" style="display: none; height: 0%; width: 0;" votosAfirmativos="[VOTOS-AFIRMATIVOS]" votosSTM="[VOTOS-STM]" votosJM="[VOTOS-JM]" ></div>
+</div>
