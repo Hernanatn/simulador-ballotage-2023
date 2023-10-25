@@ -12,19 +12,24 @@ def iniciarServidor(host :str = HOST, puerto :int = PUERTO):
     try:
         servidor.abrir()
     except Exception as e:
-        print(f"{e}")
-        return
+        pass
 
-def abrirSimulador(host :str = HOST, puerto :int = PUERTO):
+
+def cerrarSimulador(hiloServidor,ventana):
+    hiloServidor.join()
+    ventana.destroy()
+
+
+def abrirSimulador(hilo, cerrar, host :str = HOST, puerto :int = PUERTO):
     import webview
-    webview.create_window("Simulador 2023",f"http://{host}:{puerto}/",width=800,height=1000,min_size=(450,1000))
-    webview.start()
+    ventana = webview.create_window("Simulador 2023",f"http://{host}:{puerto}/",width=800,height=1000,min_size=(450,1000))
+    webview.start(cerrar,(hilo,ventana))
+
 
 def main():
     hiloServidor : Thread = Thread(target=iniciarServidor)
     hiloServidor.start()
-    abrirSimulador()
-    hiloServidor.join()
+    abrirSimulador(hiloServidor,cerrarSimulador)
     
     
 

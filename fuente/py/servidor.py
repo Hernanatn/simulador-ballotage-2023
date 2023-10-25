@@ -158,8 +158,10 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
             self.send_header("Content-type","text/html")
             self.end_headers()
             self.wfile.write(bytes(b'<div id="principal"><h1>Gracias por usar el Simulador.</h1></div>'))
+
             self.wfile.flush()
-            Thread(target=self.server.shutdown, daemon=True).start()
+            self.finish()
+            self.server.server_close()
             
 
         elif self.path == "/computar":
@@ -189,16 +191,16 @@ class Servidor(HTTPServer):
 
     def morir(self):
         print("Servidor muerto")
-        raise ServidorMuerto("La conexión fue finiquitada por el cliente.") 
+        raise ServidorMuerto()
 
     def abrir(self):
         try:
             self.serve_forever()
-        except Exception:
-            self.cerrar()
         except ServidorMuerto as e:
-            raise e
-        except KeyboardInterrupt:
+            raise(e)
+
+        except:
             self.morir()
+            return
             
 if __name__ == '__main__': pass
