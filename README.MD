@@ -2,7 +2,7 @@
 Hecho por <a href="cajadeideas.ar">Ch'aska</a>
 
 ## Ejecutable:
-https://github.com/Hernanatn/simulador-ballotage-2023/blob/main/dist/simulador.exe
+<a href="https://github.com/Hernanatn/simulador-ballotage-2023/blob/main/dist/simulador.exe">simulador.exe</a>
 
 ## Código Fuente:
-https://github.com/Hernanatn/simulador-ballotage-2023/tree/main/fuente
+<a href="https://github.com/Hernanatn/simulador-ballotage-2023/tree/main/fuente"> código fuente </a>.
