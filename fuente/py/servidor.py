@@ -87,7 +87,6 @@ class ConfigServidor(metaclass=Singleton):
     def __setattr__(self, nombre : str, dato : Any):
         raise AttributeError(f"No se puede reasignar el atributo {nombre}")
 
-
 class ManejadorSolicitudes(BaseHTTPRequestHandler):
 
     def __init__(self, request, client_address, server):
@@ -116,9 +115,15 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
 
     def refrescarIndice(self):
         INDICE : bytes
-        with open(rutaRecurso("simulador.html"),"rb") as simulador:
+        with open(rutaRecurso("indice.html"),"rb") as simulador:
             INDICE = simulador.read()    
         self.indice = INDICE
+
+    def refrescarSimulador(self):
+        SIMULADOR : bytes
+        with open(rutaRecurso("simulador.html"),"rb") as simulador:
+            SIMULADOR = simulador.read()    
+        self.simulador = SIMULADOR
 
     def do_GET(self) -> None:
         URI_SOLICITUD : str = self.path
@@ -128,6 +133,14 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
             self.send_header("Content-type","text/html")
             self.end_headers()
             self.wfile.write(self.indice)
+
+        elif URI_SOLICITUD == "/simulador":
+            self.refrescarSimulador()
+            self.send_response(200)
+            self.send_header("Content-type","text/html")
+            self.end_headers()
+            self.wfile.write(self.simulador)
+
         elif isfile(rutaRecurso(f"./{URI_SOLICITUD}")):
             tipo = guess_type(URI_SOLICITUD)[0]
             self.send_response(200)
@@ -198,7 +211,6 @@ class Servidor(HTTPServer):
             self.serve_forever()
         except ServidorMuerto as e:
             raise(e)
-
         except:
             self.morir()
             return

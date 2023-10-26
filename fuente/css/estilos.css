@@ -289,6 +289,7 @@ button.computar {
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s ease-in;
+    transition: all.2s ease-out;
     margin: 0%;
 
     font-family: 'Josefin Sans';
@@ -377,3 +378,87 @@ div#contenedorVotos
     margin: 0%;
 }
 
+button.inicio {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 60%; /* Full-width */
+    height: 80px; /* Specified height */
+    background: #c2a43a; 
+    outline: none; /* Remove outline */
+    border : none;
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: all.2s ease-out;
+    margin: 0%;
+
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    color: #000000;
+    box-shadow: 2px 2px black;
+    position: absolute;
+    top: 30%;
+    bottom: 50%;
+    left: 20%;
+
+}
+
+button.inicio:active
+{
+    opacity: 1;
+    background: #000; 
+    color: #fdc601;
+    transform: translate(2px,2px);
+    box-shadow: 0px 0px transparent;
+   
+}
+
+
+button#cerrarIndice {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 4vh; /* Full-width */
+    height: 4vh; /* Specified height */
+ 
+    outline: none; /* Remove outline */
+    border : none;
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    transition: all.2s ease-out;
+
+    font-family: 'Josefin Sans';
+    font-style: italic;
+    font-weight: 700;
+    position: absolute;
+
+    color: #c2a43a;
+    background: #000; 
+    box-shadow: 2px 2px #c2a43a;
+    top: 43%;
+    left: 48%;
+}
+
+button#cerrarIndice:active
+{
+    opacity: 1;
+    background: #fdc601; 
+    color: #000;
+    transform: translate(2px,2px);
+    box-shadow: 0px 0px transparent;
+   
+}
+
+button:hover
+{
+    opacity: 1;
+    background: #fdc601; 
+   
+}
+
+button#cerrarIndice:hover
+{
+    opacity: 1;
+    background: #000; 
+   
+}
