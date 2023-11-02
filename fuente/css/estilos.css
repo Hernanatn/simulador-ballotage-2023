@@ -331,7 +331,7 @@ button.barra {
     background: #c2a43a; 
 }
 
-button.barra#compartir
+button.barra#dados
 {
     background: #000000;
     color: #c2a43a; 
@@ -344,7 +344,7 @@ button.barra#reiniciar
 }
 
 
-button.barra#compartir:active
+button.barra#dados:active
 {
     color: #000000;
     background: #c2a43a;

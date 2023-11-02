@@ -25,14 +25,12 @@ class Computador():
     def __init__(self, valores : dict) -> None:
         self.votosValidos   : int = int(valores['votosValidos'])
         self.votantesNuevos : int = int(valores['votantesNuevos'])
-
         self.massaSTM       : int = int(valores['massaSTM'])
         self.mileiSTM : int = int(valores['mileiSTM'])
         self.bullrichSTM   : int = int(valores['bullrichSTM'])
         self.schiarettiSTM   : int = int(valores['schiarettiSTM'])
         self.bregmanSTM : int = int(valores['bregmanSTM'])
         self.nuevosSTM : int = int(valores['nuevosSTM'])
-
         self.massaJM       : int = int(valores['massaJM'])
         self.mileiJM : int = int(valores['mileiJM'])
         self.bullrichJM   : int = int(valores['bullrichJM'])
@@ -56,7 +54,7 @@ class Computador():
     def mitadMasUno(self) -> int:
         return round(self.Afirmativos/2)+1
 
-    def generarHTML(self) -> str:
+    def resultadosHTML(self) -> str:
         base : str
         with open(rutaRecurso("./html/resultado.html"),"r",encoding="utf-8") as plantilla:
             base = plantilla.read()
@@ -74,6 +72,36 @@ class Computador():
                     .replace("[VOTOS-JM]",f"{self.votosJM}")\
 
         return resultado
+
+    @staticmethod
+    def dadosHTML() -> str:
+        
+        base : str
+        with open(rutaRecurso("./html/dados.html"),"r",encoding="utf-8") as plantilla:
+            base = plantilla.read()
+        
+        # [HACER]: Dados, variables aleatorias.
+
+        votosValidos = 0
+        votantesNuevos = 0
+        massaSTM = 0
+        mileiSTM = 0
+        bullrichSTM = 0
+        schiarettiSTM = 0
+        bregmanSTM = 0
+        nuevosSTM = 0
+        massaJM = 0
+        mileiJM  = 0
+        bullrichJM = 0
+        schiarettiJM = 0
+        bregmanJM = 0
+        nuevosJM = 0
+
+        dados = base\
+                    .replace("[VOTOS-TOTALES]",f"{self.Afirmativos:,}")\
+
+        return dados
+        
 
 class ConfigServidor(metaclass=Singleton):
 
@@ -173,7 +201,6 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
             self.wfile.write(bytes(b'<div id="principal"><h1>Gracias por usar el Simulador.</h1></div>'))
 
             self.wfile.flush()
-            self.finish()
             self.server.server_close()
             
 
@@ -181,13 +208,29 @@ class ManejadorSolicitudes(BaseHTTPRequestHandler):
             largo = int(self.headers.get('content-length'))
             data = loads(unquote(self.rfile.read(largo).decode("utf-8")).replace("valores=",""))
             computador = Computador(data)
-            resultado = computador.generarHTML()
+            resultado = computador.resultadosHTML()
             
             self.send_response(200)
             self.send_header("Content-type","text/html")
             self.end_headers()
 
             self.wfile.write(bytes(resultado,"utf-8"))
+
+        elif self.path == "/dados":
+            dados = Computador.dadosHTML()
+            
+            self.send_response(200)
+            self.send_header("Content-type","text/html")
+            self.end_headers()
+
+            self.wfile.write(bytes(dados,"utf-8"))
+        else:
+            self.send_error(HTTPStatus.NOT_FOUND)
+            self.send_header("Content-type","text/html")
+            self.end_headers()
+            self.wfile.write(b"404 no encotrada")            
+        self.wfile.flush()
+        
 
         self.wfile.flush
 

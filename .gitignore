@@ -3,3 +3,5 @@ _prueba
 
 *.spec
 build
+
+*.crt

@@ -7,19 +7,14 @@
     <i style="text-align: left; font-size: 2vh; margin: 0%; vertical-align: top;">Simulador de Escenarios</i>
     </ul>
     <ul style="float: right;">
-        <li><button class="barra" id="compartir" style="float: right; margin-right: 2vw;"> <span class="material-symbols-outlined">
-            share
+        <li><button class="barra" id="dados" style="float: right; margin-right: 2vw;"> <span class="material-symbols-outlined"
+            > 
+            casino
             </span></button></li>
         <li><button class="barra" id="reiniciar" style="float: right; margin-right: 1vw;"> <span class="material-symbols-outlined"
-            hx-on:click ="
-            iniciarPorDefecto();
-            actualizarTodos();
-            document.getElementById('salidaParticipacion').innerHTML = document.getElementById('participacion').value;      
-            "
-            hx-post = "/computar"
-            hx-vals = 'js:{"valores" : devolverValores()}'
+            hx-get = "/simulador"
             hx-swap = "outerHTML"
-            hx-target = "#resultado">
+            hx-target = "body">
             refresh
             </span></button></li>
             <li><button class="barra" id="cerrar" style="float: right; margin-right: 1vw;"
@@ -41,7 +36,7 @@
         <div class="cajaDeslizador">
             <input type="range" min="66.0" max="85.0" value="77.5" step="0.5" class="deslizador" id="participacion"
             hx-trigger = "change changed"
-            hx-on:input = "actualizarParticipacion(); actualizarNuevos();"
+            hx-on:input = "actualizarParticipacion(); actualizarNuevos(); actualizarVotos(); ajustarBarrasGanador();"
             ></input>
             <br><i><span class="valoresDeslizador" id="salidaParticipacion"
                     >77.5</span>%</i>
@@ -55,9 +50,9 @@
             <div class="cajaDeslizador cajaDeslizadorDoble">
             <div class="controlDeslizadorDoble">
                 <input type="range" min="0" max="1" value="1" step="0.01" class="deslizadorJM" id="massaJM"
-                hx-on:input = "if (document.getElementById('massaJM').value < document.getElementById('massaSTM').value){document.getElementById('massaSTM').value = document.getElementById('massaJM').value}; actualizarMassa();">
+                hx-on:input = "if (document.getElementById('massaJM').value < document.getElementById('massaSTM').value){document.getElementById('massaSTM').value = document.getElementById('massaJM').value}; actualizarMassa(); actualizarVotos(); ajustarBarrasGanador();">
                 <input type="range" min="0" max="1" value="0.9" step="0.01" class="deslizadorSTM" id="massaSTM"
-                hx-on:input = "if (document.getElementById('massaSTM').value > document.getElementById('massaJM').value){document.getElementById('massaJM').value = document.getElementById('massaSTM').value}; actualizarMassa();"
+                hx-on:input = "if (document.getElementById('massaSTM').value > document.getElementById('massaJM').value){document.getElementById('massaJM').value = document.getElementById('massaSTM').value}; actualizarMassa(); actualizarVotos(); ajustarBarrasGanador();"
                 >
                 <br><br><i><span class="valoresDeslizador" id="salidaMassa">8.681.384</span> de votos</i>
             </div>
@@ -69,9 +64,9 @@
             <div class="cajaDeslizador cajaDeslizadorDoble">
             <div class="controlDeslizadorDoble">
                 <input type="range" min="0" max="1" value="1" step="0.01" class="deslizadorSTM" id="mileiSTM"
-                hx-on:input = "if (document.getElementById('mileiSTM').value < document.getElementById('mileiJM').value){document.getElementById('mileiJM').value = document.getElementById('mileiSTM').value}; actualizarMilei();">
+                hx-on:input = "if (document.getElementById('mileiSTM').value < document.getElementById('mileiJM').value){document.getElementById('mileiJM').value = document.getElementById('mileiSTM').value}; actualizarMilei();  actualizarVotos(); ajustarBarrasGanador();">
                 <input type="range" min="0" max="1" value="0.9" step="0.01" class="deslizadorJM" id="mileiJM"
-                hx-on:input = "if (document.getElementById('mileiJM').value > document.getElementById('mileiSTM').value){document.getElementById('mileiSTM').value = document.getElementById('mileiJM').value}; actualizarMilei();"
+                hx-on:input = "if (document.getElementById('mileiJM').value > document.getElementById('mileiSTM').value){document.getElementById('mileiSTM').value = document.getElementById('mileiJM').value}; actualizarMilei();  actualizarVotos(); ajustarBarrasGanador();"
                 >
                 <br><br><i><span class="valoresDeslizador" id="salidaMilei">7.095.902</span> de votos</i>
             </div>
@@ -83,10 +78,10 @@
             <div class="cajaDeslizador cajaDeslizadorDoble">
                 <div class="controlDeslizadorDoble">
                     <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="bullrichJM"
-                    hx-on:input = "if (document.getElementById('bullrichJM').value < document.getElementById('bullrichSTM').value){document.getElementById('bullrichSTM').value = document.getElementById('bullrichJM').value}; actualizarBullrich();"
+                    hx-on:input = "if (document.getElementById('bullrichJM').value < document.getElementById('bullrichSTM').value){document.getElementById('bullrichSTM').value = document.getElementById('bullrichJM').value}; actualizarBullrich();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="bullrichSTM"
-                    hx-on:input = "if (document.getElementById('bullrichSTM').value > document.getElementById('bullrichJM').value){document.getElementById('bullrichJM').value = document.getElementById('bullrichSTM').value}; actualizarBullrich();"
+                    hx-on:input = "if (document.getElementById('bullrichSTM').value > document.getElementById('bullrichJM').value){document.getElementById('bullrichJM').value = document.getElementById('bullrichSTM').value}; actualizarBullrich();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <br><br><i><span class="valoresDeslizador" id="salidabullrich">-</span></i>
                 </div>
@@ -98,10 +93,10 @@
             <div class="cajaDeslizador cajaDeslizadorDoble">
                 <div class="controlDeslizadorDoble">
                     <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="schiarettiJM"
-                    hx-on:input = "if (document.getElementById('schiarettiJM').value < document.getElementById('schiarettiSTM').value){document.getElementById('schiarettiSTM').value = document.getElementById('schiarettiJM').value}; actualizarSchiaretti();"
+                    hx-on:input = "if (document.getElementById('schiarettiJM').value < document.getElementById('schiarettiSTM').value){document.getElementById('schiarettiSTM').value = document.getElementById('schiarettiJM').value}; actualizarSchiaretti();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="schiarettiSTM"
-                    hx-on:input = "if (document.getElementById('schiarettiSTM').value > document.getElementById('schiarettiJM').value){document.getElementById('schiarettiJM').value = document.getElementById('schiarettiSTM').value}; actualizarSchiaretti();"
+                    hx-on:input = "if (document.getElementById('schiarettiSTM').value > document.getElementById('schiarettiJM').value){document.getElementById('schiarettiJM').value = document.getElementById('schiarettiSTM').value}; actualizarSchiaretti();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <br><br><i><span class="valoresDeslizador" id="salidaSchiaretti">-</span></i>
                 </div>
@@ -113,10 +108,10 @@
             <div class="cajaDeslizador cajaDeslizadorDoble">
                 <div class="controlDeslizadorDoble">
                     <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="bregmanJM"
-                    hx-on:input = "if (document.getElementById('bregmanJM').value < document.getElementById('bregmanSTM').value){document.getElementById('bregmanSTM').value = document.getElementById('bregmanJM').value}; actualizarBregman();"
+                    hx-on:input = "if (document.getElementById('bregmanJM').value < document.getElementById('bregmanSTM').value){document.getElementById('bregmanSTM').value = document.getElementById('bregmanJM').value}; actualizarBregman();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="bregmanSTM"
-                    hx-on:input = "if (document.getElementById('bregmanSTM').value > document.getElementById('bregmanJM').value){document.getElementById('bregmanJM').value = document.getElementById('bregmanSTM').value}; actualizarBregman();"
+                    hx-on:input = "if (document.getElementById('bregmanSTM').value > document.getElementById('bregmanJM').value){document.getElementById('bregmanJM').value = document.getElementById('bregmanSTM').value}; actualizarBregman();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <br><br><i><span class="valoresDeslizador" id="salidabregman">-</span></i>
                 </div>
@@ -128,10 +123,10 @@
             <div class="cajaDeslizador cajaDeslizadorDoble">
                 <div class="controlDeslizadorDoble">
                     <input type="range" min="0" max="1" value="0.6" step="0.01" class="deslizadorJM" id="nuevosJM"
-                    hx-on:input = "if (document.getElementById('nuevosJM').value < document.getElementById('nuevosSTM').value){document.getElementById('nuevosSTM').value = document.getElementById('nuevosJM').value}; actualizarNuevos();"
+                    hx-on:input = "if (document.getElementById('nuevosJM').value < document.getElementById('nuevosSTM').value){document.getElementById('nuevosSTM').value = document.getElementById('nuevosJM').value}; actualizarNuevos();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <input type="range" min="0" max="1" value="0.4" step="0.01" class="deslizadorSTM" id="nuevosSTM"
-                    hx-on:input = "if (document.getElementById('nuevosSTM').value > document.getElementById('nuevosJM').value){document.getElementById('nuevosJM').value = document.getElementById('nuevosSTM').value}; actualizarNuevos();"
+                    hx-on:input = "if (document.getElementById('nuevosSTM').value > document.getElementById('nuevosJM').value){document.getElementById('nuevosJM').value = document.getElementById('nuevosSTM').value}; actualizarNuevos();  actualizarVotos(); ajustarBarrasGanador();"
                     >
                     <br><br><i><span class="valoresDeslizador" id="salidanuevos">-</span></i>
                 </div>
@@ -158,10 +153,8 @@
         </div>
         <div id="ganador">
             <div class= "barraGanador" id="barraSTM">
-                a
             </div>
             <div class= "barraGanador" id="barraJM"> 
-                a
             </div>
         </div>
     </div>
