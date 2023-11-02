@@ -5,3 +5,5 @@ _prueba
 build
 
 *.crt
+
+certificado.crt
