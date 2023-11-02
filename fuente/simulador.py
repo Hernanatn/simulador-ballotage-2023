@@ -2,7 +2,7 @@ import webbrowser
 from threading import Thread
 from py.servidor import ConfigServidor, Servidor, ManejadorSolicitudes
 
-DEBUG = True
+DEBUG = False
 
 CONFIG : ConfigServidor = ConfigServidor()
 HOST, PUERTO = CONFIG.direccion
@@ -25,7 +25,7 @@ def abrirSimulador(hilo, cerrar, host :str = HOST, puerto :int = PUERTO):
     if DEBUG: webbrowser.open(f"http://{host}:{puerto}/")
     else:
         import webview
-        ventana = webview.create_window("Simulador 2023",f"http://{host}:{puerto}/",width=800,height=1000,min_size=(450,1000))
+        ventana = webview.create_window("Simulador 2023",f"http://{host}:{puerto}/",width=800,height=1000,min_size=(450,1000),frameless=True,easy_drag=False)
         webview.start(cerrar,(hilo,ventana))
 
 
